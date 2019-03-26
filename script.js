@@ -28,8 +28,7 @@ function ajaxSearchMovies() {
         addDataMovie(title, orgTit, lang, voto);
         inputUsr.val("");
       }
-      var intVote = Math.round(voto/2);
-      addStarsVote2(intVote);
+
     },
     error : function (request, state, error) {
 
@@ -41,7 +40,6 @@ function ajaxSearchMovies() {
 }
 
 function addDataMovie(title, orgTit, lang, voto) {
-
 
     var data = {
 
@@ -55,51 +53,51 @@ function addDataMovie(title, orgTit, lang, voto) {
     var compiled = Handlebars.compile(template);
     var ulMovies = compiled(data);
 
-    var ul = $(".films");//.text("") per risolvere il bug di una nuova ricerca che non sovrascrive quella precedente...ma non ci siamo ancora!!
+    var ul = $(".films");//.text("") per risolvere bug una nuova ricerca che non sovrascrive la precedente...ma non ci siamo ancora!!
     ul.append(ulMovies);
+
+    var intVote = Math.round(voto/2);
+    addStarsVote2(intVote);
 }
 
 // fatto con Nikolas
-function addStarsVote(voto) {
-  var html = "";
-  var liBox = $(".list-stars").last();
-
-  for (var i = 1; i <= 5; i++) {
-    if (voto >= i) {
-
-      html += "<i class='fas fa-star'></i>";
-    } else {
-
-      html += "<i class='far fa-star'></i>";
-    }
-  }
-  return html;
-}
+// function addStarsVote(voto) {
+//   var html = "";
+//   var liBox = $(".list-stars").last();
+//
+//   for (var i = 1; i <= 5; i++) {
+//     if (voto >= i) {
+//
+//       html += "<i class='fas fa-star'></i>";
+//     } else {
+//
+//       html += "<i class='far fa-star'></i>";
+//     }
+//   }
+//   return html;
+// }
 
 //mio tentativo
 function addStarsVote2(voto) {
 
-  var starE = "<i class='fas fa-star'></i>";
-  var starF = "<i class='far fa-star'></i>";
-  var data = {};
+  var data = {//passa con Handlebars html completo
 
-  var template = $("#stars-template").html();
-  var compiled = Handlebars.compile(template);
+    star : "<i class='far fa-star'></i>"//stella vuota
 
-  for (var i = 0; i < 5; i++) {
+  };
+
+  var liBox = $(".list-stars").last();//funzione last() per prendere sempre ultimo li
+  for (var i = 1; i <= 5; i++) {//ciclo per appendere cinque stelle: Se voto è maggiore o uguale al contatore i
 
     if (voto >= i) {
 
-      data.star = starE;
-      var liStars = compiled(data);
-      var liBox = $(".list-stars").last();
-      liBox.append(liStars);
+      var piena = data.star;
+      piena = "<i class='fas fa-star'></i>"
+      liBox.append(piena);
     } else {
 
-      data.star = starF;
-      var liStars = compiled(data);
-      var liBox = $(".list-stars").last();
-      liBox.append(liStars);
+      var vuota = data.star;
+      liBox.append(vuota);
     }
   }
 }
