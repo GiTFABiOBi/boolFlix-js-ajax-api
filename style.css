@@ -39,9 +39,36 @@ button {
   outline: none;
 }
 
+.box-data {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.films,
+.series {
+  width: 50%;
+
+}
+
+.cont-film,
+.cont-serie {
+  padding: 20px 0;
+  display: flex;
+  width: 100%;
+}
+
 ul {
   width: 100%;
   padding: 30px;
+}
+
+ul > span {
+  display: block;
+  width: 85%;
+  font-size: 16px;
+  border-bottom: 2px solid red;
+  padding: 10px 0;
 }
 
 li {
@@ -53,4 +80,25 @@ li {
 
 li > span {
   color: red;
+}
+
+.lang_s img,
+.lang_m img {
+  width: 25px;
+  display: inline-block;
+  margin-bottom: -2.5px;
+}
+
+.box-poster {
+  width: 30%;
+  height: 100%;
+}
+
+.box-dati {
+  width: 70%;
+  height: 100%;
+}
+
+.locandina {
+  max-width: 100%;
 }
