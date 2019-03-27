@@ -165,7 +165,7 @@ function getFlag(lang) {
     lang = "<img src='imgs/france.png'>";
   } else {
 
-    lang = "<img src='imgs/pirate.png'>";
+    lang = "<span>3. Lingua: </span>" + lang;
   }
 
   return lang;
