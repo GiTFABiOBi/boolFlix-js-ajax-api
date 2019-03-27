@@ -102,3 +102,23 @@ li > span {
 .locandina {
   max-width: 100%;
 }
+
+.voto > i {
+  color: #ffe449;
+}
+
+.no-img {
+  width: 92px;
+  height: 138px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  border: 2px solid red;
+  flex-wrap: wrap;
+}
+
+.no-img >span {
+  width: 100%;
+  text-align: center;
+}

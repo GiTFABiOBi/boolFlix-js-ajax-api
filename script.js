@@ -1,3 +1,4 @@
+// CHIAMATA AJAX FILM
 function ajaxSearchMovies() {
 
   var inputUsr = $("#input-movies");
@@ -41,7 +42,29 @@ function ajaxSearchMovies() {
     },
   });
 }
+// AGGIUNGE DATI HTML DEI FILM
+function addDataMovie(title, orgTit, lang, voto, img) {
 
+  var images = addPosterImg(img);
+  var intVote = Math.ceil(voto/2);
+  var rating = addStarsVote(intVote);
+  var data = {
+
+    title : title,
+    orgTit : orgTit,
+    lang : getFlag(lang),
+    pathImg : images,
+    rating : rating
+  }
+
+  var template = $("#film-template").html();
+  var compiled = Handlebars.compile(template);
+  var ulMovies = compiled(data);
+  var ul = $(".films");
+  ul.append(ulMovies);
+
+}
+// CHIAMATA AJAX SERIE TV
 function ajaxSearchSeries() {
 
   var inputUsr = $("#input-movies");
@@ -85,117 +108,19 @@ function ajaxSearchSeries() {
     },
   });
 }
+// AGGIUNGE DATI HTML SERIE TV
+function addDataSeries(name, nameTit, lang, votoS, img) {
 
-function getPostherImgM(img) {
-
-  $.ajax({
-
-    url : "https://image.tmdb.org/t/p/w92" + img,
-    method : "GET",
-    success : function(data, state) {
-
-      var data = {
-
-        img : img
-      }
-    },
-    error : function(request, state, error) {
-
-      console.log("request", request),
-      console.log("state", state),
-      console.log("error", error)
-    }
-  });
-}
-
-function getFlagM(lang) {
-
-  var langLi = $(".lang_m").last();
-  if (lang == "it" || lang == "IT") {
-
-    lang = "<img src='imgs/italy.png'>";
-    langLi.append(lang);
-  } else if (lang == "US" || lang == "us") {
-
-    lang = "<img src='imgs/united_states.png'>";
-    langLi.append(lang);
-  } else if (lang == "de" || lang == "DE") {
-
-    lang = "<img src='imgs/germany.png'>";
-    langLi.append(lang);
-  } else if (lang == "en" || lang == "EN") {
-
-    lang = "<img src='imgs/united_kingdom.png'>";
-    langLi.append(lang);
-  } else if (lang == "fr" || lang == "FR") {
-
-    lang = "<img src='imgs/france.png'>";
-    langLi.append(lang);
-  } else {
-
-    lang = "<img src='imgs/pirate.png'>";
-    langLi.append(lang);
-  }
-}
-
-function addDataMovie(title, orgTit, lang, voto, img) {
-
-  var data = {
-
-    title : title,
-    orgTit : orgTit,
-    lang : getFlagM(lang),
-    img : getPostherImgM(img)
-  }
-
-  var template = $("#film-template").html();
-  var compiled = Handlebars.compile(template);
-  var ulMovies = compiled(data);
-  var ul = $(".films");
-  ul.append(ulMovies);
-
-  var intVote = Math.ceil(voto/2);
-  addStarsVoteM(intVote);
-}
-
-function getFlagS(lang) {
-
-  var langLi = $(".lang_m").last();
-  if (lang == "it" || lang == "IT") {
-
-    lang = "<img src='imgs/italy.png'>";
-    langLi.append(lang);
-  } else if (lang == "US" || lang == "us") {
-
-    lang = "<img src='imgs/united_states.png'>";
-    langLi.append(lang);
-  } else if (lang == "de" || lang == "DE") {
-
-    lang = "<img src='imgs/germany.png'>";
-    langLi.append(lang);
-  } else if (lang == "en" || lang == "EN") {
-
-    lang = "<img src='imgs/united_kingdom.png'>";
-    langLi.append(lang);
-  } else if (lang == "fr" || lang == "FR") {
-
-    lang = "<img src='imgs/france.png'>";
-    langLi.append(lang);
-  } else {
-
-    lang = "<img src='imgs/pirate.png'>";
-    langLi.append(lang);
-  }
-}
-
-function addDataSeries(name, nameTit, lang, votoS) {
-
+  var images = addPosterImg(img);
+  var intVote = Math.ceil(votoS/2);
+  var rating = addStarsVote(intVote);
   var data = {
 
     name : name,
     nameTit : nameTit,
-    lang : getFlagS(lang),
-    // img : getPostherImgM(img)
+    lang : getFlag(lang),
+    pathImg : images,
+    rating : rating
   }
 
   var template = $("#series-template").html();
@@ -203,12 +128,69 @@ function addDataSeries(name, nameTit, lang, votoS) {
   var ulSeries = compiled(data);
   var ul = $(".series");
   ul.append(ulSeries);
-
-  var intVote = Math.ceil(votoS/2);
-  addStarsVoteS(intVote);
 }
+// AGGIUNGE LOCANDINA O LOCANDINA IMG NON PRESENTE
+function addPosterImg(img) {
 
-// fatto con Nikolas
+  var noLocand = "<div class='no-img'><span>immagine non disponibile</span></div>";
+  var images = "";
+
+    if (img == null) {
+
+      images += noLocand;
+    } else {
+
+      images += "<img src='https://image.tmdb.org/t/p/w92" + img + "'>";
+    }
+
+  return images;
+}
+//AGGIUNGE BANDIERA NAZIONALITA'
+function getFlag(lang) {
+
+  if (lang == "it" || lang == "IT") {
+
+    lang = "<img src='imgs/italy.png'>";
+  } else if (lang == "US" || lang == "us") {
+
+    lang = "<img src='imgs/united_states.png'>";
+  } else if (lang == "de" || lang == "DE") {
+
+    lang = "<img src='imgs/germany.png'>";
+  } else if (lang == "en" || lang == "EN") {
+
+    lang = "<img src='imgs/united_kingdom.png'>";
+  } else if (lang == "fr" || lang == "FR") {
+
+    lang = "<img src='imgs/france.png'>";
+  } else {
+
+    lang = "<img src='imgs/pirate.png'>";
+  }
+
+  return lang;
+}
+// AGGIUNGE STELLE IN BASE AL VOTO MEDIO
+function addStarsVote(voto) {
+
+  var stellaVuota = "<i class='far fa-star'></i>";
+  var stellaPiena = "<i class='fas fa-star'></i>";
+  var str = "";
+
+  for (var i = 1; i <= 5; i++) {//ciclo per appendere cinque stelle: Se voto è maggiore o uguale al contatore i
+
+    if (voto >= i) {
+
+      str += stellaPiena;
+    } else {
+
+      str += stellaVuota;
+    }
+  }
+
+  return str;
+}
+// AGGIUNGE STELLE(fatto con Nikolas)
 // function addStarsVote(voto) {
 //   var html = "";
 //   var liBox = $(".list-stars").last();
@@ -224,51 +206,12 @@ function addDataSeries(name, nameTit, lang, votoS) {
 //   }
 //   return html;
 // }
-
-
-//mio tentativo
-function addStarsVoteM(voto) {
-
-  var stellaVuota = "<i class='far fa-star'></i>";
-  var stellaPiena = "<i class='fas fa-star'></i>";
-  var liBox = $(".list-stars-M").last();//funzione last() per prendere sempre ultimo li
-
-  for (var i = 1; i <= 5; i++) {//ciclo per appendere cinque stelle: Se voto è maggiore o uguale al contatore i
-
-    if (voto >= i) {
-
-      liBox.append(stellaPiena);
-    } else {
-
-      liBox.append(stellaVuota);
-    }
-  }
-}
-
-function addStarsVoteS(voto) {
-
-  var stellaVuota = "<i class='far fa-star'></i>";
-  var stellaPiena = "<i class='fas fa-star'></i>";
-  var liBox = $(".list-stars-S").last();//funzione last() per prendere sempre ultimo li
-
-  for (var i = 1; i <= 5; i++) {//ciclo per appendere cinque stelle: Se voto è maggiore o uguale al contatore i
-
-    if (voto >= i) {
-
-      liBox.append(stellaPiena);
-    } else {
-
-      liBox.append(stellaVuota);
-    }
-  }
-}
-
 function init() {
-
+  //evento click
   var searchBtn = $("#btn-movies");
   searchBtn.click(ajaxSearchMovies);
   searchBtn.click(ajaxSearchSeries);
-
+  //evento enter tastiera
   var inputBtn = $("#input-movies");
   inputBtn.on("keyup", function(e) {
 
@@ -277,18 +220,7 @@ function init() {
       ajaxSearchMovies();
       ajaxSearchSeries();
     }
-  })
+  });
 }
 
 $(document).ready(init);
-
-
-
-
-
-
-
-//<i class="fas fa-flag"></i>   bandierina nera
-//<i class="far fa-flag"></i>   bandierina bianca
-//<i class="fas fa-flag-usa"></i> bandierina USA
-//<i class="fas fa-flag-checkered"></i> bandierina race

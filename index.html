@@ -17,15 +17,15 @@
   <!-- TEMPLATE Handlebars -->
   <script id="film-template" type="text/x-handlebars-template">
     <div class="cont-film">
-      <div class="box-img">
-        <img src="{{ img }}" alt="">
+      <div class="box-poster">
+        {{{ pathImg }}}
       </div>
       <div class="box-dati">
         <li><span>1. Film: </span>{{ title }}</li>
         <li><span>2. Titolo originale: </span>{{ orgTit }}</li>
-        <li><span class="lang_m">3. </span> {{{ lang }}}</li>
+        <li class="lang_m">{{{ lang }}}</li>
         <li class="list-stars-M">
-          <span class="voto">4. Voto: </span>
+          <span class="voto">4. Voto: {{{ rating }}}</span>
         </li>
         <br>
       </div>
@@ -34,14 +34,14 @@
     <script id="series-template" type="text/x-handlebars-template">
     <div class="cont-serie">
       <div class="box-poster">
-        <img src="{{ img }}" alt="">
+        {{{ pathImg }}}
       </div>
       <div class="box-dati">
         <li><span>1. Serie: </span>{{ name }}</li>
         <li><span>2. Titolo originale: </span>{{ nameTit }}</li>
-        <li><span class="lang_s">3. </span>{{ lang }}</li>
+        <li class="lang_s">{{{ lang }}}</li>
         <li class="list-stars-S">
-          <span class="voto">4. Voto: </span>
+          <span class="voto">4. Voto: {{{ rating }}}</span>
         </li>
         <br>
       </div>
