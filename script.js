@@ -140,7 +140,7 @@ function addPosterImg(img) {
       images += noLocand;
     } else {
 
-      images += "<img src='https://image.tmdb.org/t/p/w92" + img + "'>";
+      images += "<div class='poster' style=\"background:url('https://image.tmdb.org/t/p/w342" + img + "');background-size:cover;\"></div>";
     }
 
   return images;

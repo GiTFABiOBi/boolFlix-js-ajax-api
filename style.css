@@ -8,12 +8,25 @@
 
 header {
   width: 100vw;
+  background: #000;
+}
+
+header > .container {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+h1 {
+  color: #b71c1c;
+  width: calc(((100% - 20px) - 40%) / 2);
+  text-align: center;
+  font-size: 40px;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1164px;
   margin: auto;
-  padding: 30px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,8 +34,7 @@ header {
 }
 
 .box-search {
-  border-bottom: 1px solid #cecece;
-  width: 100%;
+  width: 40%;
   padding: 20px;
   text-align: center;
 }
@@ -40,33 +52,29 @@ button {
 }
 
 .box-data {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
 }
 
 .films,
 .series {
-  width: 50%;
-
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .cont-film,
 .cont-serie {
-  padding: 20px 0;
-  display: flex;
-  width: 100%;
+  padding: 1.5px;
 }
 
 ul {
-  width: 100%;
-  padding: 30px;
+  padding: 20px 0;
 }
 
 ul > span {
   display: block;
-  width: 85%;
-  font-size: 16px;
+  width: 105%;
+  font-size: 36px;
   border-bottom: 2px solid red;
   padding: 10px 0;
 }
@@ -90,13 +98,28 @@ li > span {
 }
 
 .box-poster {
-  width: 30%;
-  height: 100%;
+  width: 330px;
+  height: 458px;
+  position: relative;
+}
+
+.poster {
+  width: 330px;
+  height: 458px;
 }
 
 .box-dati {
-  width: 70%;
-  height: 100%;
+  width: 330px;
+  height: 458px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+}
+
+.cont-film:hover .box-dati {
+  display: block;
 }
 
 .locandina {
@@ -108,8 +131,8 @@ li > span {
 }
 
 .no-img {
-  width: 92px;
-  height: 138px;
+  width: 330px;
+  height: 458px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,7 +141,8 @@ li > span {
   flex-wrap: wrap;
 }
 
-.no-img >span {
-  width: 100%;
+.no-img > span {
+  width: 60%;
   text-align: center;
+  font-size: 40px;
 }
