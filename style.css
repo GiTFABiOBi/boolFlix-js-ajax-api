@@ -49,10 +49,14 @@ header > .container {
 }
 
 h1 {
+  align-self: flex-start;
+}
+
+h1 > a {
+  text-decoration: none;
   color: #b71c1c;
   font-size: 40px;
   display: flex;
-  align-self: flex-start;
   font-weight: 700;
 }
 
@@ -223,8 +227,7 @@ li > span {
   left: 50%;
   transform: translate(-50%, -50%);
   color: crimson;
-  text-shadow: -1px 8px 15px #606060;
-  font-size: 120px;
+  font-size: 100px;
   text-align: center;
   width: 100%;
 }
