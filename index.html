@@ -16,74 +16,34 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" charset="utf-8"></script>
   <!-- TEMPLATE Handlebars -->
   <script id="film-template" type="text/x-handlebars-template">
-    <div class="cont-film">
-      <div class="box-poster">
-        {{{ pathImg }}}
-        <div class="box-dati">
-          <li style="font-size:26px;text-align:center;font-weight:700;">{{ title }}</li>
-          <li><span>Titolo originale: </span>{{ orgTit }}</li>
-          <li class="lang_m">{{{ lang }}}</li>
-          <li class="list-stars-M">
-            <span class="voto">Valutazione: {{{ rating }}}</span>
-          </li>
-          <li><span>Descrizione:</span><span style="font-size:13px;line-height:12.5px;display: block;color:#fff;">{{{ overview }}}</span></li>
-          <br>
-        </div>
-      </div>
-    </div>
-  </script>
-  <script id="series-template" type="text/x-handlebars-template">
-    <div class="cont-serie">
-      <div class="box-poster">
-        {{{ pathImg }}}
-        <div class="box-dati">
-          <li style="font-size:26px;text-align:center;font-weight:700;">{{ title }}</li>
-          <li><span>Titolo originale: </span>{{ orgTit }}</li>
-          <li class="lang_m">{{{ lang }}}</li>
-          <li class="list-stars-M">
-            <span class="voto">Valutazione: {{{ rating }}}</span>
-          </li>
-          <li><span>Descrizione:</span><span style="font-size:13px;line-height:12.5px;display: block;color:#fff;">{{{ overview }}}</span></li>
-        </div>
-      </div>
-    </div>
+
   </script>
   <!-- JS: MY SCRIPT -->
   <script src="script.js" charset="utf-8"></script>
 </head>
   <body>
-    <div class="back-img">
-      <div class="layover">
-        <header>
-          <div class="container">
-            <h1><a href="#">BOOLFLIX</a></h1>
-            <nav>
-              <a href="#">Home</a>
-              <a href="#">Serie TV</a>
-              <a href="#">Film</a>
-              <a href="#">Originali</a>
-              <a href="#">Aggiunti di recente</a>
-              <a href="#">La mia lista</a>
-            </nav>
-            <div class="box-search">
-              <input id ="input-movies" type="search" value="" placeholder="inizia la tua ricerca...">
-              <button id ="btn-movies" type="button" name="button">CERCA</button>
-            </div>
+    <div class="container-profili">
+      <div class="box-profili">
+        <h2>BOOLFLIX</h2>
+        <span>Chi vuole guardare Boolflix?</span>
+        <div class="profili">
+          <!-- profilo 1 -->
+          <div class="profilo">
+            <a href="profilo1.html"><img src="imgs/profilo1.png" alt="profilo1"></a>
+            <span>EMANUELA</span>
           </div>
-        </header>
-        <div class="container">
-          <div class="box-data">
-            <!-- elenco film -->
-            <h2 class="mov"></h2>
-            <ul class="films"></ul>
-            <!-- elenco serie tv -->
-            <h2 class="ser"></h2>
-            <ul class="series"></ul>
+          <!-- profilo 2 -->
+          <div class="profilo">
+            <a href="profilo2.html"><img src="imgs/profilo2.png" alt="profilo2"></a>
+            <span>FABIO</span>
+          </div>
+          <!-- profilo bambini -->
+          <div class="profilo">
+            <a href="profilo3.html"><img src="imgs/profiloBimbi.png" alt="profiloBimbi"></a>
+            <span>Bambini</span>
           </div>
         </div>
-      </div>
-      <div class="benvenuto">
-        BENVENUTO SU BOOLFLIX
+        <div class="gestione"><span>GESTIONE PROFILI</span></div>
       </div>
     </div>
   </body>

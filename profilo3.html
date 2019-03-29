@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <!-- CSS: FONTAWESOME -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- GOOGLE FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+  <!-- CSS: STYLESHEET -->
+  <link rel="stylesheet" href="style.css">
+  <title>BOOLFLIX</title>
+  <!-- JS: JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- JS: HANDLEBARS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" charset="utf-8"></script>
+  <!-- TEMPLATE Handlebars -->
+  <script id="film-template" type="text/x-handlebars-template">
+    <div class="cont-film">
+      <div class="box-poster">
+        {{{ pathImg }}}
+        <div class="box-dati">
+          <li style="font-size:26px;text-align:center;font-weight:700;">{{ title }}</li>
+          <li><span>Titolo originale: </span>{{ orgTit }}</li>
+          <li class="lang_m">{{{ lang }}}</li>
+          <li class="list-stars-M">
+            <span class="voto">Valutazione: {{{ rating }}}</span>
+          </li>
+          <li><span>Descrizione:</span><span style="font-size:13px;line-height:12.5px;display: block;color:#fff;">{{{ overview }}}</span></li>
+          <br>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script id="series-template" type="text/x-handlebars-template">
+    <div class="cont-serie">
+      <div class="box-poster">
+        {{{ pathImg }}}
+        <div class="box-dati">
+          <li style="font-size:26px;text-align:center;font-weight:700;">{{ title }}</li>
+          <li><span>Titolo originale: </span>{{ orgTit }}</li>
+          <li class="lang_m">{{{ lang }}}</li>
+          <li class="list-stars-M">
+            <span class="voto">Valutazione: {{{ rating }}}</span>
+          </li>
+          <li><span>Descrizione:</span><span style="font-size:13px;line-height:12.5px;display: block;color:#fff;">{{{ overview }}}</span></li>
+        </div>
+      </div>
+    </div>
+  </script>
+  <!-- JS: MY SCRIPT -->
+  <script src="script.js" charset="utf-8"></script>
+</head>
+  <body>
+    <div class="back-img">
+      <div class="layover">
+        <header>
+          <div class="container">
+            <h1><a href="index.html">BOOLFLIX</a></h1>
+            <nav>
+              <a href="#">Home</a>
+              <a href="#">Serie TV</a>
+              <a href="#">Film</a>
+              <a href="#">Originali</a>
+              <a href="#">Aggiunti di recente</a>
+              <a href="#">La mia lista</a>
+            </nav>
+            <div class="box-search">
+              <input id ="input-movies" type="search" value="" placeholder="inizia la tua ricerca...">
+              <button id ="btn-movies" type="button" name="button"><i class="fas fa-search fa-lg"></i></button>
+              <span>Bambini</span>
+              <i class="fas fa-bell fa-lg"></i>
+              <img src="imgs/profiloBimbi.png" alt="profiloBimbi">
+            </div>
+          </div>
+        </header>
+        <div class="container">
+          <div class="box-data">
+            <!-- elenco film -->
+            <h2 class="mov"></h2>
+            <ul class="films"></ul>
+            <!-- elenco serie tv -->
+            <h2 class="ser"></h2>
+            <ul class="series"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="benvenuto">
+        BENVENUTO SU BOOLFLIX<br><span style="font-size:30px;">la  piattaforma  pi&ugrave;  booleana  di  sempre</span>
+      </div>
+    </div>
+  </body>
+</html>
