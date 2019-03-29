@@ -33,7 +33,8 @@ function ajaxSearchMovies() {
         var voto = el.vote_average;
         var img = el.poster_path;
         var descr = el.overview;
-        addDataMovie(title, orgTit, lang, voto, img, descr);
+        var id = el.id
+        addDataMovie(title, orgTit, lang, voto, img, descr, id);
         inputUsr.val("");
       }
     },
@@ -45,8 +46,56 @@ function ajaxSearchMovies() {
     },
   });
 }
+
+function getActorName(id) {
+
+  var inputUsr = $("#input-movies");
+  var inpVal = inputUsr.val();
+  var outData = {
+
+    api_key : "9a91df29ebcb30ccb6b8d083a5400a47",
+    language : "it-IT",
+    query : inpVal
+  }
+
+  $.ajax({
+
+    url : "https://api.themoviedb.org/3/movie/" + id + "/credits",
+    method : "GET",
+    data : outData,
+    success : function (data) {
+
+      // var ul = $(".cont-film");
+      // ul.remove();
+      // var benvenutoTitle = $(".benvenuto").remove();
+      // var h2 = $(".box-data > h2.mov");
+      // h2.html("<span>FILM ORIGINALI BOOLFLIX</span>");
+
+      var arrayCast = data.cast;
+      var boxActor = $("[data-id='" + id + "']");
+      boxActor.html("");
+      for (var i = 0; i < arrayCast.length; i++) {
+
+        var el = arrayCast[i];
+        var actorName = el.name;
+        console.log(el);
+        if (i < 5) {
+
+          boxActor.append("<h5 style='color:#fff;'>" + actorName + "</h5>");
+        }
+      }
+    },
+    error : function (request, state, error) {
+
+      console.log("request", request),
+      console.log("state", state),
+      console.log("error", error)
+    },
+  });
+}
+
 // AGGIUNGE DATI HTML DEI FILM
-function addDataMovie(title, orgTit, lang, voto, img, descr) {
+function addDataMovie(title, orgTit, lang, voto, img, descr, id) {
 
   var images = addPosterImg(img);
   var intVote = Math.ceil(voto/2);
@@ -58,7 +107,8 @@ function addDataMovie(title, orgTit, lang, voto, img, descr) {
     lang : getFlag(lang),
     pathImg : images,
     rating : rating,
-    overview : descr
+    overview : descr,
+    id : id
   }
 
   var template = $("#film-template").html();
@@ -228,6 +278,13 @@ function init() {
       ajaxSearchMovies();
       ajaxSearchSeries();
     }
+  });
+
+
+  $(document).on("click", ".show-cast", function() {
+    var idFilm = $(this).parent().attr("data-id");
+
+    getActorName(idFilm);
   });
 }
 

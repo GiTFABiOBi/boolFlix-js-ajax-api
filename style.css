@@ -72,10 +72,13 @@ nav {
 
 nav > a {
   text-decoration: none;
-  color: #fff;
+  color: #cecece;
   font-weight: bold;
   margin-right: 40px;
   font-size: 14px;
+}
+nav > a:hover {
+  color: #fff;
 }
 
 .box-search {
@@ -207,7 +210,11 @@ li > span {
   left: 0;
   background: rgba(0, 0, 0, 0.8);
   display: none;
+}
 
+.show-cast {
+  margin: 0;
+  width: 100%;
 }
 
 .cont-film:hover .box-dati,
@@ -301,8 +308,12 @@ li > span {
   border: 2px solid #101010;
 }
 
-.profilo > a > img:hover {
+.profilo:hover img {
   border: 2px solid #fff;
+}
+
+.profilo:hover span {
+  color: #fff;
 }
 
 .profilo > span {
