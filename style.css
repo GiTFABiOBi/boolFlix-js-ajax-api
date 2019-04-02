@@ -98,7 +98,7 @@ input {
  margin-right: 60px;
 }
 
-button {
+button#btn-movies {
   padding-right: 10px;
   outline: none;
   background: none;
@@ -340,4 +340,28 @@ li > span {
 .gestione > span:hover {
   color: #fff;
   border: 1px solid #fff;
+}
+
+.overview {
+  font-size:14px;
+  line-height:12px;
+  display: block;
+  color: #fff;
+}
+
+.no-description,
+.no-cast {
+  font-size:18px;
+  display: block;
+  color:#fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.btn-cast {
+  padding: 5px;
+  background: pink;
+  color: #fff;
+  display: block;
+  margin: auto;
 }

@@ -34,6 +34,7 @@ function ajaxSearchMovies() {
         var img = el.poster_path;
         var descr = el.overview;
         var id = el.id
+
         addDataMovie(title, orgTit, lang, voto, img, descr, id);
         inputUsr.val("");
       }
@@ -47,7 +48,8 @@ function ajaxSearchMovies() {
   });
 }
 
-function getActorName(id) {
+// CHIAMATA AJAX CAST FILM
+function getActorNameMOVIE(id) {
 
   var inputUsr = $("#input-movies");
   var inpVal = inputUsr.val();
@@ -65,23 +67,24 @@ function getActorName(id) {
     data : outData,
     success : function (data) {
 
-      // var ul = $(".cont-film");
-      // ul.remove();
-      // var benvenutoTitle = $(".benvenuto").remove();
-      // var h2 = $(".box-data > h2.mov");
-      // h2.html("<span>FILM ORIGINALI BOOLFLIX</span>");
-
       var arrayCast = data.cast;
-      var boxActor = $("[data-id='" + id + "']");
+      var boxActor = $("[data-id-movie='" + id + "']");
       boxActor.html("");
+      if (arrayCast == 0) {
+
+        boxActor.html("<h5 class='no-cast';'>CAST NON DISPONIBILE</h5>");
+      };
+
       for (var i = 0; i < arrayCast.length; i++) {
 
         var el = arrayCast[i];
         var actorName = el.name;
-        console.log(el);
         if (i < 5) {
 
-          boxActor.append("<h5 style='color:#fff;'>" + actorName + "</h5>");
+          boxActor.append("<span style='color:#fff;font-size:16px;'> · " + actorName + "</span>");
+        } else {
+
+          // boxActor.remove();
         }
       }
     },
@@ -94,12 +97,13 @@ function getActorName(id) {
   });
 }
 
-// AGGIUNGE DATI HTML DEI FILM
+// AGGIUNGE DATI HTML FILM
 function addDataMovie(title, orgTit, lang, voto, img, descr, id) {
 
   var images = addPosterImg(img);
   var intVote = Math.ceil(voto/2);
   var rating = addStarsVote(intVote);
+
   var data = {
 
     title : title,
@@ -116,8 +120,8 @@ function addDataMovie(title, orgTit, lang, voto, img, descr, id) {
   var ulMovies = compiled(data);
   var ul = $(".films");
   ul.append(ulMovies);
-
 }
+
 // CHIAMATA AJAX SERIE TV
 function ajaxSearchSeries() {
 
@@ -153,7 +157,8 @@ function ajaxSearchSeries() {
         var votoS = el.vote_average;
         var img = el.poster_path;
         var descr = el.overview;
-        addDataSeries(name, nameTit, lang, votoS, img, descr);
+        var id = el.id
+        addDataSeries(name, nameTit, lang, votoS, img, descr, id);
         inputUsr.val("");
       }
     },
@@ -165,12 +170,63 @@ function ajaxSearchSeries() {
     },
   });
 }
+
+// CHIAMATA AJAX CAST SERIE TV
+function getActorNameTV(id) {
+
+  var inputUsr = $("#input-movies");
+  var inpVal = inputUsr.val();
+  var outData = {
+
+    api_key : "9a91df29ebcb30ccb6b8d083a5400a47",
+    language : "it-IT",
+    query : inpVal
+  }
+
+  $.ajax({
+
+    url : "https://api.themoviedb.org/3/tv/" + id + "/credits",
+    method : "GET",
+    data : outData,
+    success : function (data) {
+
+      var arrayCast = data.cast;
+      var boxActor = $("[data-id-series='" + id + "']");
+      boxActor.html("");
+      if (arrayCast == 0 || arrayCast == false) {
+
+        boxActor.html("<h5 class='no-cast';'>CAST NON DISPONIBILE</h5>");
+      };
+
+      for (var i = 0; i < arrayCast.length; i++) {
+
+        var el = arrayCast[i];
+        var actorName = el.name;
+        if (i < 5) {
+
+          boxActor.append("<span style='color:#fff;font-size:16px;'>" + actorName + ", </span>");
+        } else {
+
+          // boxActor.remove();
+        }
+      }
+    },
+    error : function (request, state, error) {
+
+      console.log("request", request),
+      console.log("state", state),
+      console.log("error", error)
+    },
+  });
+}
+
 // AGGIUNGE DATI HTML SERIE TV
-function addDataSeries(name, nameTit, lang, votoS, img, descr) {
+function addDataSeries(name, nameTit, lang, votoS, img, descr, id) {
 
   var images = addPosterImg(img);
   var intVote = Math.ceil(votoS/2);
   var rating = addStarsVote(intVote);
+
   var data = {
 
     name : name,
@@ -178,8 +234,10 @@ function addDataSeries(name, nameTit, lang, votoS, img, descr) {
     lang : getFlag(lang),
     pathImg : images,
     rating : rating,
-    overview : descr
+    overview : descr,
+    id : id
   }
+
 
   var template = $("#series-template").html();
   var compiled = Handlebars.compile(template);
@@ -265,6 +323,7 @@ function addStarsVote(voto) {
 //   return html;
 // }
 function init() {
+
   //evento click
   var searchBtn = $("#btn-movies");
   searchBtn.click(ajaxSearchMovies);
@@ -277,15 +336,23 @@ function init() {
 
       ajaxSearchMovies();
       ajaxSearchSeries();
+
     }
   });
 
+    $(document).on("click", ".btn-cast", function() {
 
-  $(document).on("click", ".show-cast", function() {
-    var idFilm = $(this).parent().attr("data-id");
+      var idFilmM = $(this).parent().attr("data-id-movie");
+      getActorNameMOVIE(idFilmM);
+    });
 
-    getActorName(idFilm);
-  });
+    $(document).on("click", ".btn-cast", function() {
+
+      var idFilmS = $(this).parent().attr("data-id-series");
+      getActorNameTV(idFilmS);
+    });
+
+
 }
 
 $(document).ready(init);

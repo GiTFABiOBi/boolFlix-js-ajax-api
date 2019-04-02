@@ -26,9 +26,9 @@
           <li class="list-stars-M">
             <span class="voto">Valutazione: {{{ rating }}}</span>
           </li>
-          <li><span>Descrizione:</span><span style="font-size:13px;line-height:12.5px;display: block;color:#fff;">{{{ overview }}}</span></li>
+          <li><span class ="descriptionM">Descrizione: <span class="overview">{{{ overview }}}</span></span></li>
           <br>
-          <span data-id="{{ id }}"><button type="button" name="button" class="show-cast">mostra il cast</button></span>
+          <div data-id-movie="{{ id }}"><button type="button" name="button" class="btn-cast">guarda il cast</button></div>
         </div>
       </div>
     </div>
@@ -44,7 +44,9 @@
           <li class="list-stars-M">
             <span class="voto">Valutazione: {{{ rating }}}</span>
           </li>
-          <li><span>Descrizione:</span><span style="font-size:13px;line-height:12.5px;display: block;color:#fff;">{{{ overview }}}</span></li>
+          <li><span class ="descriptionS">Descrizione: <span class="overview">{{{ overview }}}</span></span></li>
+          <br>
+          <div data-id-series="{{ id }}"><button type="button" name="button" class="btn-cast">guarda il cast</button></div>
         </div>
       </div>
     </div>
